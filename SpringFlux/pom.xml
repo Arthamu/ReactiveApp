@@ -38,6 +38,9 @@
         </execution>
     </executions>
 </plugin></plugins></pluginManagement>
+
+   <finalName>app</finalName>
+
   </build>
   
   <dependencies>
