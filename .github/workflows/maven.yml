@@ -19,5 +19,5 @@ jobs:
       env:
         REPO: git@github.com:Arthamu/ArtifactRepo.git
         BRANCH: master
-        FOLDER: target
+        FOLDER: SpringFlux/target/app.jar
         SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_PRIVATE_KEY }}
