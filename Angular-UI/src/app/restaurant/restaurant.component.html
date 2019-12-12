@@ -1,0 +1,13 @@
+
+<div >
+        <button  mat-raised-button color="primary" (click)="requestQuoteStream()">Reactive Request</button>
+
+   
+      <table class="table table-responsive table-bordered">
+      
+        <tbody>
+        <tr *ngFor="let quote of restaurants | async; let i=index" [class.success]="quote === selectedRes" (click)="onSelect(quote)" >
+          <td><img [src]="quote.url"></td>
+        </tr>
+        </tbody>
+      </table></div>
