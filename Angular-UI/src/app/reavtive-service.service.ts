@@ -32,7 +32,7 @@ export class ReavtiveServiceService {
         url = this.urlPaged + '?page=' + page + '&size=' + size;
       }
       console.log(url);
-      let eventSource = new EventSourcePolyfill(url+"/getAll",{ heartbeatTimeout: 1000, connectionTimeout: 1000 });
+      let eventSource = new EventSourcePolyfill(url+"/getAll",{ heartbeatTimeout: 10000, connectionTimeout: 1000 });
       eventSource.onmessage = (event) => {
         console.debug('Received event: ', event);
       
