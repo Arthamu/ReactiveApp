@@ -19,10 +19,12 @@ export class ReavtiveServiceService {
 
   
   Restaurantss: Restaurants[] = [];
-  url: string = 'https://'+this.getHostname();
-  urlPaged: string = 'http://localhost:2005/getAllpaged';
+Size:Number=0;
+
+  url: string = this.getHostname();
+  urlPaged: string = this.url+'/getAllPaged';
   getHostname() : string {
-    return this.window.location.hostname;
+    return this.window.location.protocol+ this.window.location.host;
 }
   getRestaurantsStream(page?: number, size?: number): Observable<Array<Restaurants>> {
     this.Restaurantss = [];
@@ -30,21 +32,18 @@ export class ReavtiveServiceService {
       let url = this.url;
       if (page != null) {
         url = this.urlPaged + '?page=' + page + '&size=' + size;
-      }
+      }else url=url+"/getAll";
       console.log(url);
-      let eventSource = new EventSourcePolyfill(url+"/getAll",{ heartbeatTimeout: 10000, connectionTimeout: 1000 });
+      let eventSource = new EventSourcePolyfill(url,{ heartbeatTimeout: 10000, connectionTimeout: 10000 });
       eventSource.onmessage = (event) => {
-        console.debug('Received event: ', event);
-      
-        console.log(event.data);
         
         let Restaurants =JSON.parse(event.data);
-        console.log(Restaurants);
+   
         let random = Math.floor((Math.random() * 1000) + 200);
          let x =Restaurants.url.split('/');
          x[3]=random+'';
          Restaurants.url= x.join('/',x);
-        console.log(Restaurants);
+  
         this.Restaurantss.push(Restaurants);
         observer.next(this.Restaurantss);
       };
@@ -60,6 +59,20 @@ export class ReavtiveServiceService {
           observer.error('EventSource error: ' + error);
         }
       }
+    });
+  }
+  getStreamSize() :  Observable<number>{
+
+    return Observable.create((observer) => {
+      let url = this.url;
+      let eventSource = new EventSourcePolyfill(url+"/SizeOfList",{ heartbeatTimeout: 10000, connectionTimeout: 10000 });
+      eventSource.onmessage = (event) => {
+
+        
+       let size:number=JSON.parse(event.data);
+        observer.next(size);
+      }
+        
     });
   }
 

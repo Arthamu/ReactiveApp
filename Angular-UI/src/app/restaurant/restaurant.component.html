@@ -1,13 +1,29 @@
-
-<div >
-        <button  mat-raised-button color="primary" (click)="requestQuoteStream()">Click Me</button>
-
-   
-      <table class="table table-responsive table-bordered">
-      
-        <tbody>
-        <tr *ngFor="let quote of restaurants | async; let i=index" [class.success]="quote === selectedRes" (click)="onSelect(quote)" >
-          <td><img [src]="quote.url"></td>
-        </tr>
-        </tbody>
-      </table></div>
+         <div style="height: {{innerHeight}};">
+            <mat-grid-list [cols]="breakpoint" row="pageSize/4" (window:resize)="onResize($event)" rowHeight="50px">
+            <ngx-spinner
+            bdOpacity = 0.8
+          
+            size = "default"
+            color = "#fff"
+            type = "square-jelly-box"
+            [fullScreen] = "true"
+            >
+            <p style="color: white" > Loading... </p>
+            </ngx-spinner>
+            <mat-grid-tile
+            *ngFor="let quote of restaurants | async; let i=index"
+                [colspan]="1"
+                [rowspan]="5"
+               >
+               <mat-card  class="artha-card">
+                 <img mat-card-image height="350"  [src]="quote.url">
+                </mat-card>
+               
+            </mat-grid-tile>
+          </mat-grid-list>
+        </div>
+          <mat-paginator [length]="length "
+              [pageSize]="pageSize"
+              [pageSizeOptions]="pageSizeOptions"
+              (page)="pageEvent=getServerData($event)">
+</mat-paginator>

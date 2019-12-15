@@ -13,6 +13,7 @@ import com.artha.reactive.entity.Resturants;
 import com.artha.reactive.repo.MongoRepo;
 
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -20,10 +21,10 @@ public class ReactiveController {
 	@Autowired
 	MongoRepo repo;
 
-	long DELAY_PER_ITEM_MS = 10;
+	long DELAY_PER_ITEM_MS = 1;
 	
 	  @GetMapping("/getAll") Flux<Resturants> getAll(){
-	  
+	  System.out.println("here");
 	  return repo.findAll().delayElements(Duration.ofMillis(DELAY_PER_ITEM_MS)); }
 	 
 
@@ -33,6 +34,11 @@ public class ReactiveController {
 		return repo.retrieveAllResturantsPaged(PageRequest.of(page, size))
 				.delayElements(Duration.ofMillis(DELAY_PER_ITEM_MS));
 	}
+	@GetMapping("/SizeOfList")
+	public Mono<Long> getQuoteFlux() {
+		return repo.count();
+	}
+
 
 	/*
 	 * @GetMapping("/getAll") String getAll() throws JsonMappingException,
