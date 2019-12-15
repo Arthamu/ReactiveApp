@@ -24,7 +24,7 @@ Size:Number=0;
   url: string = this.getHostname();
   urlPaged: string = this.url+'/getAllPaged';
   getHostname() : string {
-    return this.window.location.protocol+"://"+ this.window.location.host;
+    return this.window.location.protocol+"//"+ this.window.location.host;
 }
   getRestaurantsStream(page?: number, size?: number): Observable<Array<Restaurants>> {
     this.Restaurantss = [];
