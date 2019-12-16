@@ -24,7 +24,7 @@
             </mat-grid-tile>
           </mat-grid-list>
         </div>
-        <div *ngIf=" (restaurants | async)?.length==0"> <mat-paginator  [length]="length "
+        <div *ngIf=" (restaurants | async)?.length!=0"> <mat-paginator  [length]="length "
               [pageSize]="pageSize"
               [pageSizeOptions]="pageSizeOptions"
               (page)="pageEvent=getServerData($event)">
