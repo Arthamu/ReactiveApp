@@ -13,12 +13,7 @@ jobs:
       with:
         java-version: 11
     - name: Build with Maven
-    - uses: actions/cache@v1
-      with:
-         path: ~/.m2/repository
-         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-         restore-keys: |
-              ${{ runner.os }}-maven-
+ 
     - run: mvn -B package --file pom.xml
     - name: Deploy
       uses: s0/git-publish-subdir-action@master
