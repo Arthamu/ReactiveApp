@@ -47,18 +47,38 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
-import { NavbarComponent } from './navbar/navbar.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSpinnerModule } from 'ngx-spinner';
-
+import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { FbNavComponent } from './fb-nav/fb-nav.component';
+import {HttpClientModule} from '@angular/common/http';
+let config = new AuthServiceConfig([
+  /* {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider("Google-OAuth-Client-Id")
+  }, */
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider("1045593989150452")
+  }
+]);
+ 
+export function provideConfig() {
+  return config;
+}
 @NgModule({
   declarations: [
     AppComponent,
     RestaurantComponent,
-    NavbarComponent
+  
+    FbNavComponent
   ],
   imports: [
+    HttpClientModule,
+    AngularFontAwesomeModule,
+    SocialLoginModule,
     NgxSpinnerModule,
     BrowserModule,
     AppRoutingModule,
@@ -111,9 +131,16 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   ],
   providers: [
     WINDOW_PROVIDERS,
-    ReavtiveServiceService
+    ReavtiveServiceService,
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    }
   ],
   bootstrap: [AppComponent],
   
 })
-export class AppModule { }
+export class AppModule { 
+
+  
+}

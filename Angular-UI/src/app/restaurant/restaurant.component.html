@@ -1,15 +1,17 @@
-         <div style="height: {{innerHeight}};">
+    
+      <ngx-spinner
+      bdOpacity =0.8
+    
+      size = "pageSize"
+      color = "#fff"
+      type = "square-jelly-box"
+      [fullScreen] = "true"
+      >
+      <p style="color: white" > Loading... </p>
+      </ngx-spinner>
+    <div>
             <mat-grid-list [cols]="breakpoint" row="pageSize/4" (window:resize)="onResize($event)" rowHeight="50px">
-            <ngx-spinner
-            bdOpacity = 0.8
           
-            size = "default"
-            color = "#fff"
-            type = "square-jelly-box"
-            [fullScreen] = "true"
-            >
-            <p style="color: white" > Loading... </p>
-            </ngx-spinner>
             <mat-grid-tile
             *ngFor="let quote of restaurants | async; let i=index"
                 [colspan]="1"
@@ -22,8 +24,8 @@
             </mat-grid-tile>
           </mat-grid-list>
         </div>
-          <mat-paginator [length]="length "
+        <div *ngIf=" (restaurants | async)?.length==0"> <mat-paginator  [length]="length "
               [pageSize]="pageSize"
               [pageSizeOptions]="pageSizeOptions"
               (page)="pageEvent=getServerData($event)">
-</mat-paginator>
+</mat-paginator></div> 

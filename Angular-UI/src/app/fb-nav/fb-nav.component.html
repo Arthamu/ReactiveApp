@@ -1,0 +1,53 @@
+<mat-sidenav-container class="sidenav-container">
+ <!--  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list  *ngIf="loggedIn===true">
+        <img   mat-list-item src="{{ user.photoUrl }}">
+        <span mat-list-item>{{ user.name }}</span>
+    <span mat-list-item>{{ user.email }}</span>
+    </mat-nav-list> 
+  </mat-sidenav> -->
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+     <!--  <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button> -->
+      <span>Angular-UI</span>
+      <span class="example-fill-remaining-space"></span>
+      <mat-menu #appMenu="matMenu" >
+        <mat-card style="margin-bottom: -8px;" >
+            <mat-card-header *ngIf="loggedIn===true">
+              <img   mat-card-avatar   src="{{ user.photoUrl }}">
+                <mat-card-title>{{ user.name }}</mat-card-title>
+          <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
+         
+        
+          </mat-card-header>
+          
+          <button mat-menu-item   *ngIf="loggedIn===true" (click)="signOut()">Sign out</button>
+          <button mat-menu-item   *ngIf="!loggedIn===true" (click)="signInWithFB()">Sign in</button>
+
+        </mat-card>
+        </mat-menu>
+        
+        <button mat-icon-button [matMenuTriggerFor]="appMenu">
+            <img  mat-card-avatar  *ngIf="loggedIn===true"  matTooltip="{{user.name}}" src="{{ user.photoUrl }}">
+           
+            <mat-icon svgIcon="facebook" *ngIf="!loggedIn===true"  ></mat-icon>
+        </button>
+  
+
+    </mat-toolbar>
+    <!-- Add Content Here -->
+
+    <app-restaurant></app-restaurant>
+  </mat-sidenav-content>
+</mat-sidenav-container>
