@@ -54,6 +54,7 @@ import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider, GoogleLogi
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { FbNavComponent } from './fb-nav/fb-nav.component';
 import {HttpClientModule} from '@angular/common/http';
+import { AngularDraggableModule } from 'angular2-draggable';
 let config = new AuthServiceConfig([
   /* {
     id: GoogleLoginProvider.PROVIDER_ID,
@@ -76,6 +77,7 @@ export function provideConfig() {
     FbNavComponent
   ],
   imports: [
+    AngularDraggableModule,
     HttpClientModule,
     AngularFontAwesomeModule,
     SocialLoginModule,

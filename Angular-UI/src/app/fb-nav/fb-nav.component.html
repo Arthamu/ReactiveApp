@@ -20,9 +20,12 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button> -->
-      <span>Angular-UI</span>
+      <span>Artha</span>
+      <a  mat-menu-item  routerLink="/customer-list">Pictures</a>
+      <a  mat-menu-item  routerLink="/calender">Calender</a>
       <span class="example-fill-remaining-space"></span>
       <mat-menu #appMenu="matMenu" >
+       
         <mat-card style="margin-bottom: -8px;" >
             <mat-card-header *ngIf="loggedIn===true">
               <img   mat-card-avatar   src="{{ user.photoUrl }}">
@@ -46,8 +49,9 @@
   
 
     </mat-toolbar>
+    
     <!-- Add Content Here -->
-
-    <app-restaurant></app-restaurant>
+    
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
